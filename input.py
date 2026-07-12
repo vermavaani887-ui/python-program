@@ -1,0 +1,10 @@
+num = (input("Enter a number:"))
+print("your number is : " +num)
+name = str(input("Enter the name :"))
+print("your name is : " +name)
+number = float (input("Enter the number:"))
+print("your number is : " +(number))
+
+print(type(number))
+print(type(name))
+print(type(num))
