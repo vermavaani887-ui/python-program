@@ -1,0 +1,109 @@
+# Library Management System
+
+library = []
+
+def add_book():
+    book_id = input("Enter Book ID: ")
+    title = input("Enter Book Title: ")
+    author = input("Enter Author Name: ")
+
+    book = {
+        "ID": book_id,
+        "Title": title,
+        "Author": author,
+        "Issued": False
+    }
+
+    library.append(book)
+    print("\nBook added successfully!")
+
+def view_books():
+    if len(library) == 0:
+        print("\nNo books available.")
+        return
+
+    print("\n===== Library Books =====")
+    for book in library:
+        status = "Issued" if book["Issued"] else "Available"
+        print(f"""
+Book ID : {book['ID']}
+Title   : {book['Title']}
+Author  : {book['Author']}
+Status  : {status}
+-----------------------------
+""")
+
+def search_book():
+    title = input("Enter Book Title: ")
+
+    for book in library:
+        if book["Title"].lower() == title.lower():
+            print("\nBook Found!")
+            print(f"Book ID : {book['ID']}")
+            print(f"Title   : {book['Title']}")
+            print(f"Author  : {book['Author']}")
+            print("Status  :", "Issued" if book["Issued"] else "Available")
+            return
+
+    print("Book not found!")
+
+def issue_book():
+    book_id = input("Enter Book ID to Issue: ")
+
+    for book in library:
+        if book["ID"] == book_id:
+            if not book["Issued"]:
+                book["Issued"] = True
+                print("Book issued successfully!")
+            else:
+                print("Book is already issued!")
+            return
+
+    print("Book not found!")
+
+def return_book():
+    book_id = input("Enter Book ID to Return: ")
+
+    for book in library:
+        if book["ID"] == book_id:
+            if book["Issued"]:
+                book["Issued"] = False
+                print("Book returned successfully!")
+            else:
+                print("This book was not issued.")
+            return
+
+    print("Book not found!")
+
+while True:
+    print("\n===== Library Management System =====")
+    print("1. Add Book")
+    print("2. View Books")
+    print("3. Search Book")
+    print("4. Issue Book")
+    print("5. Return Book")
+    print("6. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        add_book()
+
+    elif choice == "2":
+        view_books()
+
+    elif choice == "3":
+        search_book()
+
+    elif choice == "4":
+        issue_book()
+
+    elif choice == "5":
+        return_book()
+
+    elif choice == "6":
+        print("Thank you for using Library Management System!")
+        break
+
+    else:
+        print("Invalid choice! Please try again.")
